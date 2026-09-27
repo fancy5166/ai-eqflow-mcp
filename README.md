@@ -64,6 +64,21 @@ $env:AIEQFLOW_TARGETS="workbuddy,codex"; $env:AIEQFLOW_API_KEY="sk-abc123xyz"; i
 | `$env:AIEQFLOW_TARGETS="workbuddy,codex"` | 指定只装哪些工具，逗号分隔，可用值：`workbuddy` / `codex` / `claude-desktop` / `claude-code` / `cursor` | ⚠️ 按你想要的组合填；**不设这条就默认全装** |
 | 其余部分 | 与方式一②完全相同 | ⚠️ Key 换成你的真实 Key |
 
+**按工具速查：只装某一个？直接复制对应那条**（Key 记得换成你的）：
+
+| 你想装到 | 复制这条命令（PowerShell） |
+| --- | --- |
+| 仅 WorkBuddy | `$env:AIEQFLOW_TARGETS="workbuddy"; $env:AIEQFLOW_API_KEY="sk-你的Key"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 \| iex` |
+| 仅 Codex CLI | `$env:AIEQFLOW_TARGETS="codex"; $env:AIEQFLOW_API_KEY="sk-你的Key"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 \| iex` |
+| 仅 Claude Desktop | `$env:AIEQFLOW_TARGETS="claude-desktop"; $env:AIEQFLOW_API_KEY="sk-你的Key"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 \| iex` |
+| 仅 Claude Code | `$env:AIEQFLOW_TARGETS="claude-code"; $env:AIEQFLOW_API_KEY="sk-你的Key"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 \| iex` |
+| 仅 Cursor | `$env:AIEQFLOW_TARGETS="cursor"; $env:AIEQFLOW_API_KEY="sk-你的Key"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 \| iex` |
+| 装多个（任选组合） | `TARGETS` 里用逗号连接，如 `"workbuddy,codex,cursor"` |
+| 全装（不挑） | 直接用最上面的方式一②，不写 `TARGETS` 即可 |
+
+> CMD（命令提示符）用户：把上表任意一条用 `powershell -c "..."` 包起来运行，例如
+> `powershell -c "$env:AIEQFLOW_TARGETS='codex'; $env:AIEQFLOW_API_KEY='sk-你的Key'; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 | iex"`（注意引号内 Key 用单引号）。
+
 ---
 
 ### 方式二：CMD（命令提示符）一行安装
