@@ -16,13 +16,13 @@
 不用下载 zip，直接复制运行（会自动拉取脚本并进入交互安装，粘贴你的 API Key 即可）：
 
 ```powershell
-irm https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/ai-eqflow-mcp/main/setup.ps1 | iex
+irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 | iex
 ```
 
 带 Key 免交互版：
 
 ```powershell
-$env:AIEQFLOW_API_KEY="sk-你的Key"; irm https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/ai-eqflow-mcp/main/setup.ps1 | iex
+$env:AIEQFLOW_API_KEY="sk-你的Key"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 | iex
 ```
 
 > 脚本做了什么：下载安装器到临时目录 → 固化服务脚本到稳定目录 → 写入令牌 → 注册到检测到的 AI 工具（改前自动备份）→ 拉起服务自检。**可重复执行**（覆盖更新，不会弄坏原有配置）。

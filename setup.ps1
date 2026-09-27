@@ -1,16 +1,16 @@
 # AI-EqfLow MCP 一行安装入口（PowerShell）
 #
 # 用法（远端一行执行）：
-#   irm https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/ai-eqflow-mcp/main/setup.ps1 | iex
+#   irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 | iex
 #
 # 带 Key 免交互：
-#   $env:AIEQFLOW_API_KEY="sk-xxx"; irm https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/ai-eqflow-mcp/main/setup.ps1 | iex
+#   $env:AIEQFLOW_API_KEY="sk-xxx"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 | iex
 #
 # 本地执行：  powershell -ExecutionPolicy Bypass -File setup.ps1
-# 发布前：把本文件与 README.md 里的 <YOUR_GITHUB_USERNAME> 替换为实际 GitHub 用户名。
+# 发布前：把本文件与 README.md 里的 fancy5166 替换为实际 GitHub 用户名。
 
 $ErrorActionPreference = 'Stop'
-$RepoRaw = 'https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/ai-eqflow-mcp/main'
+$RepoRaw = 'https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main'
 
 Write-Host ''
 Write-Host '=== AI-EqfLow MCP 一键安装 ===' -ForegroundColor Cyan
