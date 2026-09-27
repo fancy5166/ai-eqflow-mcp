@@ -1,4 +1,4 @@
-# AI-EqfLow MCP 一行安装入口（PowerShell）
+﻿# AI-EqfLow MCP 一行安装入口（PowerShell）
 #
 # 用法（远端一行执行）：
 #   irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 | iex
@@ -13,7 +13,7 @@ $ErrorActionPreference = 'Stop'
 $RepoRaw = 'https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main'
 
 Write-Host ''
-Write-Host '=== AI-EqfLow MCP 一键安装 ===' -ForegroundColor Cyan
+Write-Host '=== AI-EqfLow MCP 一键安装 / One-Click Install ===' -ForegroundColor Cyan
 
 # ---- 1. 找 Python ----
 $py = $null
@@ -24,7 +24,7 @@ foreach ($cand in @('python', 'py', 'python3')) {
     } catch { }
 }
 if (-not $py) {
-    Write-Host '✗ 未检测到 Python。请先安装：https://www.python.org/downloads/ （务必勾选 Add python.exe to PATH），装好后重跑本命令。' -ForegroundColor Red
+    Write-Host '✗ 未检测到 Python / Python not found。请先安装 / install from: https://www.python.org/downloads/ （务必勾选 Add python.exe to PATH / check "Add to PATH"），装好后重跑本命令 / then rerun this command.' -ForegroundColor Red
     exit 1
 }
 $pyVer = (& $py --version 2>&1) -join ''
@@ -40,7 +40,7 @@ foreach ($f in $files) {
     try {
         Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
     } catch {
-        Write-Host "✗ 下载失败：$url" -ForegroundColor Red
+        Write-Host "✗ 下载失败 / download failed: $url" -ForegroundColor Red
         Write-Host $_.Exception.Message
         exit 1
     }
@@ -57,8 +57,8 @@ if ($env:AIEQFLOW_TARGETS) { $extraArgs += @('--targets', $env:AIEQFLOW_TARGETS)
 & $py $installPy @extraArgs
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host '✗ 安装未完成，请查看上方报错信息。' -ForegroundColor Red
+    Write-Host '✗ 安装未完成，请查看上方报错信息 / install incomplete, see errors above.' -ForegroundColor Red
     exit 1
 }
 Write-Host ''
-Write-Host '✓ 完成！重启对应 AI 工具后说一句「查一下我的 AI-EqfLow 令牌余额」验证。' -ForegroundColor Green
+Write-Host '✓ 完成！重启对应 AI 工具后说一句「查一下我的 AI-EqfLow 令牌余额」验证 / Done! Restart your AI tool, then ask: check my AI-EqfLow quota' -ForegroundColor Green

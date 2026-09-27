@@ -252,8 +252,18 @@ def self_check(python_exe: str, script: Path) -> bool:
 
 # ---------------------------------------------------------------- main
 def main() -> int:
-    ap = argparse.ArgumentParser(description="AI-EqfLow MCP 一键部署")
-    ap.add_argument("--key", help="API Key（sk- 开头）；不传则交互输入")
+    # 防止 GBK/ANSI 控制台打印中文或 ✓✗ 符号时崩溃（输出重定向场景常见）
+    for stream in (sys.stdout, sys.stderr):
+        if stream and hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(encoding="utf-8", errors="replace")
+            except Exception:  # noqa: BLE001
+                pass
+
+    ap = argparse.ArgumentParser(
+        prog="install.py",
+        description="AI-EqfLow MCP 一键部署 / One-Click Deploy")
+    ap.add_argument("--key", help="API Key（sk- 开头 / must start with sk-）；不传则交互输入 / prompts if omitted")
     ap.add_argument("--base-url", default=DEFAULT_BASE, help=f"API 地址（默认 {DEFAULT_BASE}）")
     ap.add_argument("--targets", default="all",
                     help="逗号分隔：workbuddy,codex,claude-desktop,claude-code,cursor 或 all")
@@ -264,14 +274,14 @@ def main() -> int:
     server_src = pkg / "server"
     for f in SERVER_FILES:
         if not (server_src / f).exists():
-            fail(f"缺少 {server_src / f}（请完整解压部署包后再运行）")
+            fail(f"缺少文件 / missing file: {server_src / f}（请完整解压/克隆后再运行 / extract or clone the full repo first）")
             return 2
 
     key = (args.key or "").strip()
     if not key:
-        key = getpass.getpass("粘贴 AI-EqfLow API Key（输入不回显）: ").strip()
+        key = getpass.getpass("粘贴 AI-EqfLow API Key（输入不回显 / input hidden）: ").strip()
     if not key.startswith("sk-"):
-        fail("API Key 应以 sk- 开头（获取：https://aieqflow.com → 个人中心 → 令牌）")
+        fail("API Key 应以 sk- 开头 / API key must start with sk-（获取 / get it: https://aieqflow.com → 个人中心 → 令牌 / Account → Tokens）")
         return 2
 
     python_exe = sys.executable or "python"
@@ -317,12 +327,12 @@ def main() -> int:
     if skipped:
         warn(f"跳过/失败：{', '.join(skipped)}（对应工具未安装或配置异常）")
     print(f"""
-{C}下一步（人工确认）：{N}
-1. 重启对应 AI 工具（WorkBuddy 需完全退出重开，或在其连接器界面点「信任/重载」）
-2. 在 AI 对话里说：{Y}查一下我的 AI-EqfLow 令牌余额{N} —— 能返回点数即部署成功
-3. 常用指令示例：出视频 / 合成语音 / 生成海报（详见 README.md 第 4 节）
+{C}下一步 / Next steps:{N}
+1. 重启对应 AI 工具 / Restart your AI tool（WorkBuddy 需完全退出重开，或在其连接器界面点「信任/重载」）
+2. 在 AI 对话里说 / then ask your AI: {Y}查一下我的 AI-EqfLow 令牌余额 / check my AI-EqfLow quota{N} —— 能返回点数即部署成功 / done if it replies with quota info
+3. 常用指令示例 / usage examples: 出视频 / 合成语音 / 生成海报（详见 README）
 
-Key 存放位置（勿外传）：{workbuddy_home() / f'{SERVER_ID}.env'} 及各工具配置文件
+Key 存放位置 / key stored at（勿外传 / keep private）: {workbuddy_home() / f'{SERVER_ID}.env'} 及各工具配置文件
 """)
     return 0
 
