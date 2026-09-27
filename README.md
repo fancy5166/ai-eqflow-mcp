@@ -51,6 +51,19 @@ $env:AIEQFLOW_API_KEY="sk-abc123xyz"; irm https://raw.githubusercontent.com/fanc
 | `$env:AIEQFLOW_API_KEY="sk-abc123xyz"` | 把你的 Key 存进一个叫 `AIEQFLOW_API_KEY` 的临时环境变量，安装脚本会自动读取它（只在当前窗口有效，不落盘） | ⚠️ **`sk-abc123xyz` 必须换成你的真实 Key**，其余原样 |
 | `;` 分号 | 分隔两条命令：先设变量、再运行安装 | ❌ 原样照抄 |
 
+> **✅ 默认就全装，不用每个工具跑一遍**：上面命令**跑一次**，会自动检测你电脑上装了哪些 AI 工具（WorkBuddy / Codex CLI / Claude Desktop / Claude Code / Cursor），**检测到几个装几个**，一次到位。
+
+**进阶：只想装指定的几个工具？** 在带 Key 版前面多设一个 `AIEQFLOW_TARGETS` 变量即可（仍是一条命令）：
+
+```powershell
+$env:AIEQFLOW_TARGETS="workbuddy,codex"; $env:AIEQFLOW_API_KEY="sk-abc123xyz"; irm https://raw.githubusercontent.com/fancy5166/ai-eqflow-mcp/main/setup.ps1 | iex
+```
+
+| 片段 | 是什么意思 | 需要改吗 |
+| --- | --- | --- |
+| `$env:AIEQFLOW_TARGETS="workbuddy,codex"` | 指定只装哪些工具，逗号分隔，可用值：`workbuddy` / `codex` / `claude-desktop` / `claude-code` / `cursor` | ⚠️ 按你想要的组合填；**不设这条就默认全装** |
+| 其余部分 | 与方式一②完全相同 | ⚠️ Key 换成你的真实 Key |
+
 ---
 
 ### 方式二：CMD（命令提示符）一行安装
@@ -84,8 +97,14 @@ powershell -c "$env:AIEQFLOW_API_KEY='sk-abc123xyz'; irm https://raw.githubuserc
 ### 方式三：手动下载安装（不用命令行）
 
 1. 打开 [Releases 页面](../../releases/latest)，下载 `ai-eqflow-mcp-deploy.zip`
-2. 解压到任意文件夹（比如桌面），**双击 `install.bat`** → 按提示粘贴 API Key
+2. 解压到任意文件夹（比如桌面），**双击 `install.bat`** → 按提示粘贴 API Key（默认全装）
 3. 看到 `✓ 自检通过：7 个工具在线` 就是装好了
+
+想只装指定工具，可在解压目录的命令行里运行（`--targets` 按需组合）：
+
+```bat
+python install.py --key sk-abc123xyz --targets workbuddy,codex
+```
 
 ---
 

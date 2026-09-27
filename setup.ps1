@@ -48,12 +48,13 @@ foreach ($f in $files) {
 Write-Host "✓ 安装器已就绪：$tmp"
 
 # ---- 3. 运行 install.py（交互输入 Key，或读环境变量） ----
+# 可选环境变量：AIEQFLOW_TARGETS（逗号分隔，指定只装部分工具；不设则装检测到的全部）
+#   例：$env:AIEQFLOW_TARGETS="workbuddy,codex"
 $installPy = Join-Path $tmp 'install.py'
-if ($env:AIEQFLOW_API_KEY) {
-    & $py $installPy --key $env:AIEQFLOW_API_KEY
-} else {
-    & $py $installPy
-}
+$extraArgs = @()
+if ($env:AIEQFLOW_API_KEY) { $extraArgs += @('--key', $env:AIEQFLOW_API_KEY) }
+if ($env:AIEQFLOW_TARGETS) { $extraArgs += @('--targets', $env:AIEQFLOW_TARGETS) }
+& $py $installPy @extraArgs
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host '✗ 安装未完成，请查看上方报错信息。' -ForegroundColor Red
