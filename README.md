@@ -5,7 +5,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](#)
 [![MCP](https://img.shields.io/badge/Protocol-MCP%20stdio-orange)](https://modelcontextprotocol.io/)
 
-把 [AI-EqfLow](https://aieqflow.com) 中转站的 **7 个 AI 能力**（余额查询 / 模型列表 / 对话 / 生图 / 生视频 / 视频任务查询 / 语音合成）一键装进你正在用的 AI 工具，无需 pip、无需 Node、无需手动改配置。
+你的 Cursor / Claude / Codex 只会写代码？装上 AI-EqfLow MCP，**AI 对话框里一句话就能生视频（Seedance 2.5）、生图（GPT-image）、配音（MiniMax）**——371+ 模型 30 秒接入你正在用的 AI 工具，无需 pip、无需 Node、无需手动改配置。
 
 > **支持**：WorkBuddy · Codex CLI · Claude Desktop · Claude Code · Cursor
 
