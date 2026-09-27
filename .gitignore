@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 密钥与本地配置 —— 永远不要提交
+*.env
+.env
+*.env.bak
+token-schema.json
+
+# 安装脚本的本地备份产物
+*.bak-*
+*.bak
+
+# 测试产物
+*.mp3
+*.mp4
+_tts_test*
+_video_test*
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
